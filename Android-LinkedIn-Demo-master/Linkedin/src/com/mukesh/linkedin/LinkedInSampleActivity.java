@@ -18,6 +18,7 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -46,6 +47,7 @@ import com.mukesh.linkedin.LinkedinDialog.OnVerifyListener;
 public class LinkedInSampleActivity extends Activity {
 	Button login;
 	Button share;
+    Button jump;
 	EditText et;
 	TextView name;
 	ImageView photo;
@@ -78,6 +80,8 @@ public class LinkedInSampleActivity extends Activity {
 		login = (Button) findViewById(R.id.login);
 		photo = (ImageView) findViewById(R.id.photo);
 
+        jump = (Button) findViewById(R.id.jump_button);
+
 		login.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -85,11 +89,24 @@ public class LinkedInSampleActivity extends Activity {
 			}
 		});
 
+        jump.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LinkedInSampleActivity.this, TestActivity.class);
+                OAuthConsumer consumer = new CommonsHttpOAuthConsumer(Config.LINKEDIN_CONSUMER_KEY, Config.LINKEDIN_CONSUMER_SECRET);
+                consumer.setTokenWithSecret(accessToken.getToken(), accessToken.getTokenSecret());
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("consumer", consumer);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
 		// share on linkedin
 		share.setOnClickListener(new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
+                @Override
+                public void onClick(View v) {
 				String share = et.getText().toString();
 				if (null != share && !share.equalsIgnoreCase("")) {
 					OAuthConsumer consumer = new CommonsHttpOAuthConsumer(Config.LINKEDIN_CONSUMER_KEY, Config.LINKEDIN_CONSUMER_SECRET);
