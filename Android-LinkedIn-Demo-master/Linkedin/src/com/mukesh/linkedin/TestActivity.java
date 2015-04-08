@@ -20,6 +20,8 @@ import org.apache.http.util.EntityUtils;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
+import beans.MyProfile;
+import linkedinAPI.TestAPI;
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
 import oauth.signpost.exception.OAuthCommunicationException;
@@ -41,38 +43,9 @@ public class TestActivity extends Activity{
         testAPI.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DefaultHttpClient httpclient = new DefaultHttpClient();
-                HttpGet get = new HttpGet("https://api.linkedin.com/v1/people/~");
-//                HttpPost post = new HttpPost("https://api.linkedin.com/v1/people/~");
-                try {
-                    consumer.sign(get);
-                } catch (OAuthMessageSignerException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (OAuthExpectationFailedException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (OAuthCommunicationException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } // here need the consumer for sign in for post the share
-                get.setHeader("content-type", "text/XML");
-
-                try {
-                    String st = EntityUtils.toString(httpclient.execute(get).getEntity(), "UTF-8");
-                    textView.setText(st);
-                    Toast.makeText(TestActivity.this,
-                            "Shared sucessfully", Toast.LENGTH_SHORT).show();
-                } catch (UnsupportedEncodingException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (ClientProtocolException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+                TestAPI testAPI = new TestAPI();
+                MyProfile myProfile = testAPI.testAPI(consumer);
+                textView.setText(myProfile.getFirstName());
             }
         });
     }
