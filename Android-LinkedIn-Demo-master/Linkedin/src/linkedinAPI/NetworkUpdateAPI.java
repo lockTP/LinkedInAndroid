@@ -22,11 +22,11 @@ import oauth.signpost.exception.OAuthMessageSignerException;
  * Created by xiaotingli on 4/8/15.
  */
 public class NetworkUpdateAPI {
-    public NetworkUpdate NetwordSearchAPI(OAuthConsumer consumer, String timeBefore, String timeAfter, String count, String keyword){
+    public NetworkUpdate networkSearchAPI(OAuthConsumer consumer, String timeBefore, String timeAfter, String count, String keyword){
         String st = null;
         ArrayList<NetworkUpdate> networkUpdates = new ArrayList<NetworkUpdate>();
         DefaultHttpClient httpclient = new DefaultHttpClient();
-        String url = "https://api.linkedin.com/v1/people/~/network/updates?count=100&after=1428521835800&before=1428521835800&format=json";
+        String url = "https://api.linkedin.com/v1/people/~/network/updates?format=json";
 //        String baseURL = "https://api.l        inkedin.com/v1/people/~/network/updates?";
 //        String url = baseURL + "count=" + count + "&" + "after=" + timeAfter + "&" + "before" + timeBefore + "&format=json";
 
@@ -52,29 +52,31 @@ public class NetworkUpdateAPI {
             JSONArray values = obj.getJSONArray("values");
             for (int i = 0; i < values.length(); i++){
                 JSONObject value = values.getJSONObject(i);
-                NetworkUpdate network = new NetworkUpdate();
+                NetworkUpdate network = null;
                 if(value.getJSONObject("updateContent") != null){
-                    if ((value.getJSONObject("updateContent").getJSONObject("company") != null)){
-                        if(value.getJSONObject("updateContent").getJSONObject("company").getString("name") != null){
+                    if (value.getJSONObject("updateContent").has("company")){
+                        network = new NetworkUpdate();
+                        if(value.getJSONObject("updateContent").getJSONObject("company").has("name")){
                             network.setCompanyName(value.getJSONObject("updateContent").getJSONObject("company").getString("name"));
                         }
                     }
-                    if ((value.getJSONObject("updateContent").getJSONObject("companyJobUpdate") != null)){
-                            if(value.getJSONObject("updateContent").getJSONObject("companyJobUpdate").getJSONObject("job") != null){
-                                if((value.getJSONObject("updateContent").getJSONObject("companyJobUpdate").getJSONObject("job").getString("description") != null)){
+                    if (value.getJSONObject("updateContent").has("companyJobUpdate")){
+                            if(value.getJSONObject("updateContent").getJSONObject("companyJobUpdate").has("job")){
+                                if(value.getJSONObject("updateContent").getJSONObject("companyJobUpdate").getJSONObject("job").has("description")){
                                     network.setDescription(value.getJSONObject("updateContent").getJSONObject("companyJobUpdate").getJSONObject("job").getString("description"));
                                 }
-                                if(value.getJSONObject("updateContent").getJSONObject("companyJobUpdate").getJSONObject("job").getJSONObject("position") != null){
-                                    if(value.getJSONObject("updateContent").getJSONObject("companyJobUpdate").getJSONObject("job").getJSONObject("position").getString("title") != null){
+                                if(value.getJSONObject("updateContent").getJSONObject("companyJobUpdate").getJSONObject("job").has("position")){
+                                    if(value.getJSONObject("updateContent").getJSONObject("companyJobUpdate").getJSONObject("job").getJSONObject("position").has("title")){
                                         network.setTitle(value.getJSONObject("updateContent").getJSONObject("companyJobUpdate").getJSONObject("job").getJSONObject("position").getString("title"));
                                     }
                                 }
                             }
+                        networkUpdates.add(network);
                         }
                 }
-                networkUpdates.add(network);
-            }
 
+            }
+            networkUpdates = searchResults(networkUpdates, "truck");
 
         } catch (UnsupportedEncodingException e) {
             // TODO Auto-generated catch block
@@ -89,5 +91,18 @@ public class NetworkUpdateAPI {
             e.printStackTrace();
         }
         return null;
+    }
+
+
+
+    public ArrayList<NetworkUpdate> searchResults(ArrayList<NetworkUpdate> networkUpdates, String keyword){
+        ArrayList<NetworkUpdate> newNetworkUpdates = new ArrayList<NetworkUpdate>();
+        keyword = keyword.toLowerCase();
+        for (int i = 0; i < networkUpdates.size(); i++){
+            if (networkUpdates.get(i).getTitle().toLowerCase().contains(keyword)||networkUpdates.get(i).getDescription().toLowerCase().contains(keyword)){
+                newNetworkUpdates.add(networkUpdates.get(i));
+            }
+        }
+        return newNetworkUpdates;
     }
 }
