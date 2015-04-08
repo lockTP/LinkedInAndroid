@@ -44,8 +44,8 @@ public class TestActivity extends Activity{
             @Override
             public void onClick(View view) {
                 TestAPI testAPI = new TestAPI();
-                MyProfile myProfile = testAPI.testAPI(consumer);
-                textView.setText(myProfile.getFirstName());
+                String st = testAPI.testAPI(consumer);
+                textView.setText(st);
             }
         });
     }

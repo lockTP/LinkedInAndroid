@@ -1,7 +1,5 @@
 package linkedinAPI;
 
-import android.widget.Toast;
-
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -21,12 +19,12 @@ import oauth.signpost.exception.OAuthMessageSignerException;
 /**
  * Created by Weichuan on 4/8/2015.
  */
-public class TestAPI {
-
-    public String testAPI(OAuthConsumer consumer){
+public class MyProfileAPI {
+    public MyProfile testAPI(OAuthConsumer consumer){
         String st = null;
+        MyProfile myProfile = null;
         DefaultHttpClient httpclient = new DefaultHttpClient();
-        HttpGet get = new HttpGet("https://api.linkedin.com/v1/people/~:(current-share)?format=json");
+        HttpGet get = new HttpGet("https://api.linkedin.com/v1/people/~?format=json");
 //                HttpPost post = new HttpPost("https://api.linkedin.com/v1/people/~format=json");
         try {
             consumer.sign(get);
@@ -44,7 +42,13 @@ public class TestAPI {
 
         try {
             st = EntityUtils.toString(httpclient.execute(get).getEntity(), "UTF-8");
-
+            JSONObject obj = new JSONObject(st);
+            myProfile = new MyProfile();
+            myProfile.setFirstName(obj.getString("firstName"));
+            myProfile.setHeadline(obj.getString("headline"));
+            myProfile.setId(obj.getString("id"));
+            myProfile.setLastName(obj.getString("lastName"));
+            myProfile.setUrl(obj.getJSONObject("siteStandardProfileRequest").getString("url"));
 
         } catch (UnsupportedEncodingException e) {
             // TODO Auto-generated catch block
@@ -55,7 +59,9 @@ public class TestAPI {
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-        return st;
+        return myProfile;
     }
 }
