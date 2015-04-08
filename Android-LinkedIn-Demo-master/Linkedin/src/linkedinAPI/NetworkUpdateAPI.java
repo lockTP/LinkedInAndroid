@@ -24,7 +24,11 @@ public class NetworkUpdateAPI {
         String st = null;
         NetworkUpdate network = null;
         DefaultHttpClient httpclient = new DefaultHttpClient();
-        HttpGet get = new HttpGet("https://api.linkedin.com/v1/people/~/network/updates");
+       // https://api.linkedin.com/v1/people/~/network/updates?count=100&after=1428521835800&before=1428521835800&format=json
+        String baseURL = "https://api.linkedin.com/v1/people/~/network/updates?";
+        String url = baseURL + "count=" + count + "&" + "after=" + timeAfter + "&" + "before" + timeBefore + "&format=json";
+
+        HttpGet get = new HttpGet(url);
 
         try {
             consumer.sign(get);
