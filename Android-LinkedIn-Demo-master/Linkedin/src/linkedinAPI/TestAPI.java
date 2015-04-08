@@ -45,7 +45,6 @@ public class TestAPI {
         try {
             st = EntityUtils.toString(httpclient.execute(get).getEntity(), "UTF-8");
 
-
         } catch (UnsupportedEncodingException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

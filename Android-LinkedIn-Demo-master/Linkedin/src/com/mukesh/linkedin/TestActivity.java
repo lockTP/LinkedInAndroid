@@ -46,7 +46,7 @@ public class TestActivity extends Activity{
                 TestAPI testAPI = new TestAPI();
                 String st = testAPI.testAPI(consumer);
                 textView.setText(st);
-                
+
             }
         });
     }
