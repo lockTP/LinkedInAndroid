@@ -4,7 +4,7 @@ package beans;
  * Created by xiaotingli on 4/8/15.
  */
 public class NetworkUpdate {
-
+    private String companyName;
     private String title;
     private String description;
 
@@ -24,4 +24,11 @@ public class NetworkUpdate {
         this.description = description;
     }
 
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
 }

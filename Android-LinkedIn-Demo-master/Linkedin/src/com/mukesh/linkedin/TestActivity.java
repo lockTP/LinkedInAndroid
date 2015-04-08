@@ -21,6 +21,8 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 import beans.MyProfile;
+import beans.NetworkUpdate;
+import linkedinAPI.NetworkUpdateAPI;
 import linkedinAPI.TestAPI;
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
@@ -43,9 +45,9 @@ public class TestActivity extends Activity{
         testAPI.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TestAPI testAPI = new TestAPI();
-                String st = testAPI.testAPI(consumer);
-                textView.setText(st);
+                NetworkUpdateAPI testAPI = new NetworkUpdateAPI();
+                NetworkUpdate st = testAPI.NetwordSearchAPI(consumer,null,null,null,null);
+//                textView.setText(st.getTitle());
 
             }
         });
