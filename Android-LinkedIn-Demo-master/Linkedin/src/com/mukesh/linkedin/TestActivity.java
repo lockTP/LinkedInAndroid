@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.example.linkedin.R;
 
+import java.util.ArrayList;
+
 import beans.NetworkUpdate;
 import linkedinAPI.NetworkUpdateAPI;
 import oauth.signpost.OAuthConsumer;
@@ -29,7 +31,7 @@ public class TestActivity extends Activity{
             @Override
             public void onClick(View view) {
                 NetworkUpdateAPI testAPI = new NetworkUpdateAPI();
-                NetworkUpdate st = testAPI.networkSearchAPI(consumer,null,null,null,null);
+                ArrayList<NetworkUpdate> st = testAPI.networkSearchAPI(consumer,"LinkedIn", "10", "account");
 //                textView.setText(st.getTitle());
 
             }

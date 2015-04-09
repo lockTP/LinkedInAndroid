@@ -192,10 +192,17 @@ public class LinkedInSampleActivity extends Activity {
 					Person p = client.getProfileForCurrentUser();
 					name.setText("Welcome " + p.getFirstName() + " "
 							+ p.getLastName());
-					name.setVisibility(0);
-					login.setVisibility(4);
-					share.setVisibility(0);
-					et.setVisibility(0);
+                    Intent intent = new Intent(LinkedInSampleActivity.this, TestActivity.class);
+                    OAuthConsumer consumer = new CommonsHttpOAuthConsumer(Config.LINKEDIN_CONSUMER_KEY, Config.LINKEDIN_CONSUMER_SECRET);
+                    consumer.setTokenWithSecret(accessToken.getToken(), accessToken.getTokenSecret());
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("consumer", consumer);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+//					name.setVisibility(0);
+//					login.setVisibility(4);
+//					share.setVisibility(0);
+//					et.setVisibility(0);
 
 				} catch (Exception e) {
 					Log.i("LinkedinSample", "error to get verifier");

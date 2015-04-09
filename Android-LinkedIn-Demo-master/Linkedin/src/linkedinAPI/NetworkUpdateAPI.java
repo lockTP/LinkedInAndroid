@@ -22,14 +22,31 @@ import oauth.signpost.exception.OAuthMessageSignerException;
  * Created by xiaotingli on 4/8/15.
  */
 public class NetworkUpdateAPI {
-    public NetworkUpdate networkSearchAPI(OAuthConsumer consumer, String timeBefore, String timeAfter, String count, String keyword){
+    public ArrayList<NetworkUpdate> networkSearchAPI(OAuthConsumer consumer, String companyName, String count, String keyword){
         String st = null;
         ArrayList<NetworkUpdate> networkUpdates = new ArrayList<NetworkUpdate>();
         DefaultHttpClient httpclient = new DefaultHttpClient();
-        String url = "https://api.linkedin.com/v1/people/~/network/updates?format=json";
-//        String baseURL = "https://api.l        inkedin.com/v1/people/~/network/updates?";
-//        String url = baseURL + "count=" + count + "&" + "after=" + timeAfter + "&" + "before" + timeBefore + "&format=json";
+        int companyId = 0;
+        if (companyName.equals("Google")){
+            companyId = 1441;
+        }else if (companyName.equals("Oracle")){
+            companyId = 1028;
+        }else if (companyName.equals("LinkedIn")){
+            companyId = 1337;
+        }else if (companyName.equals("Amazon")){
+            companyId = 1586;
+        }else if (companyName.equals("Baidu")){
+            companyId = 48433;
+        }else if (companyName.equals("Microsoft")){
+            companyId = 1035;
+        }else if (companyName.equals("Twitter")){
+            companyId = 96622;
+        }else if(companyName.equals("Facebook")){
+            companyId = 10667;
+        }
 
+//        String url = "https://api.linkedin.com/v1/companies/1337/updates?count=4&format=json&format=json-get";
+        String url = "https://api.linkedin.com/v1/companies/"+companyId+"/updates?count="+Integer.valueOf(count)+"&format=json&format=json-get";
         HttpGet get = new HttpGet(url);
 
         try {
@@ -76,7 +93,7 @@ public class NetworkUpdateAPI {
                 }
 
             }
-            networkUpdates = searchResults(networkUpdates, "truck");
+            networkUpdates = searchResults(networkUpdates, keyword);
 
         } catch (UnsupportedEncodingException e) {
             // TODO Auto-generated catch block
@@ -90,7 +107,7 @@ public class NetworkUpdateAPI {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return null;
+        return networkUpdates;
     }
 
 
