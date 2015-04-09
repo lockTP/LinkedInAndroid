@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="dexedLibs">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Linkedin/bin/dexedLibs/signpost-jetty6-1.2.1.1-83eea19ef797443f20416a35e8ae8e42.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Linkedin/bin/dexedLibs/linkedin-j-android-2bba0997d3531ae03ea6f6f52bdc7400.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Linkedin/bin/dexedLibs/android-support-v4-7e3c32c1b6680b52cc289a708a4c34d7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Linkedin/bin/dexedLibs/signpost-commonshttp4-1.2.1.1-178922d828596dd7d693cdd44a39da49.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Linkedin/bin/dexedLibs/signpost-core-1.2.1.1-ddab9a86d7021811ce84d015613e5bea.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

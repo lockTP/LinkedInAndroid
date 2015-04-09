@@ -80,7 +80,7 @@ public class LinkedInSampleActivity extends Activity {
 		login = (Button) findViewById(R.id.login);
 		photo = (ImageView) findViewById(R.id.photo);
 
-        jump = (Button) findViewById(R.id.jump_button);
+//        jump = (Button) findViewById(R.id.jump_button);
 
 		login.setOnClickListener(new OnClickListener() {
 			@Override
