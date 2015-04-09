@@ -1,13 +1,15 @@
-package FrontEnd;
+package frontEnd;
 
 import java.util.Locale;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
@@ -29,6 +31,7 @@ import com.example.linkedin.R;
 /**
  * Created by lanzhang_mini on 15/4/9.
  */
+@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class Drawer_activity extends Activity {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
@@ -41,6 +44,7 @@ public class Drawer_activity extends Activity {
     public Drawer_activity() {
     }
 
+    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -135,6 +139,7 @@ public class Drawer_activity extends Activity {
             selectItem(position);
         }
     }
+
 
     private void selectItem(int position) {
         // update the main content by replacing fragments

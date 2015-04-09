@@ -3,6 +3,7 @@ package com.mukesh.linkedin;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
+import frontEnd.Drawer_activity;
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
 import oauth.signpost.exception.OAuthCommunicationException;
@@ -89,18 +90,18 @@ public class LinkedInSampleActivity extends Activity {
 			}
 		});
 
-        jump.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LinkedInSampleActivity.this, TestActivity.class);
-                OAuthConsumer consumer = new CommonsHttpOAuthConsumer(Config.LINKEDIN_CONSUMER_KEY, Config.LINKEDIN_CONSUMER_SECRET);
-                consumer.setTokenWithSecret(accessToken.getToken(), accessToken.getTokenSecret());
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("consumer", consumer);
-                intent.putExtras(bundle);
-                startActivity(intent);
-            }
-        });
+//        jump.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(LinkedInSampleActivity.this, TestActivity.class);
+//                OAuthConsumer consumer = new CommonsHttpOAuthConsumer(Config.LINKEDIN_CONSUMER_KEY, Config.LINKEDIN_CONSUMER_SECRET);
+//                consumer.setTokenWithSecret(accessToken.getToken(), accessToken.getTokenSecret());
+//                Bundle bundle = new Bundle();
+//                bundle.putSerializable("consumer", consumer);
+//                intent.putExtras(bundle);
+//                startActivity(intent);
+//            }
+//        });
 
 		// share on linkedin
 		share.setOnClickListener(new OnClickListener() {
@@ -192,7 +193,7 @@ public class LinkedInSampleActivity extends Activity {
 					Person p = client.getProfileForCurrentUser();
 					name.setText("Welcome " + p.getFirstName() + " "
 							+ p.getLastName());
-                    Intent intent = new Intent(LinkedInSampleActivity.this, TestActivity.class);
+                    Intent intent = new Intent(LinkedInSampleActivity.this, Drawer_activity.class);
                     OAuthConsumer consumer = new CommonsHttpOAuthConsumer(Config.LINKEDIN_CONSUMER_KEY, Config.LINKEDIN_CONSUMER_SECRET);
                     consumer.setTokenWithSecret(accessToken.getToken(), accessToken.getTokenSecret());
                     Bundle bundle = new Bundle();

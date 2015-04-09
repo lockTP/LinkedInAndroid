@@ -37,8 +37,8 @@
 
         </activity>
 
-        <activity android:name="FrontEnd.SearchJob_activity" />
-        <activity android:name="FrontEnd.Drawer_activity" />
+        <activity android:name="frontEnd.SearchJob_activity" />
+        <activity android:name="frontEnd.Drawer_activity" />
 
     </application>
 
