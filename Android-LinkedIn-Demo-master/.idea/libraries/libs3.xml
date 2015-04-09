@@ -2,10 +2,10 @@
   <library name="libs">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/Linkedin/libs/linkedin-j-android.jar!/" />
-      <root url="jar://$PROJECT_DIR$/Linkedin/libs/signpost-core-1.2.1.1.jar!/" />
       <root url="jar://$PROJECT_DIR$/Linkedin/libs/signpost-commonshttp4-1.2.1.1.jar!/" />
-      <root url="jar://$PROJECT_DIR$/Linkedin/libs/signpost-jetty6-1.2.1.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Linkedin/libs/signpost-core-1.2.1.1.jar!/" />
       <root url="jar://$PROJECT_DIR$/Linkedin/libs/android-support-v4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Linkedin/libs/signpost-jetty6-1.2.1.1.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
