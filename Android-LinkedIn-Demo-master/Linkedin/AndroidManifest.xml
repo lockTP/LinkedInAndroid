@@ -29,6 +29,12 @@
             android:name="com.mukesh.linkedin.TestActivity"
             android:label="@string/app_name" >
         </activity>
+
+        <activity
+            android:name="com.mukesh.linkedin.MainActivity"
+            android:label="@string/app_name" >
+
+        </activity>
     </application>
 
 </manifest>
