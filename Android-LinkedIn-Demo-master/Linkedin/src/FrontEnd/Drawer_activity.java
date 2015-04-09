@@ -1,3 +1,4 @@
+
 package frontEnd;
 
 import java.util.Locale;
@@ -43,6 +44,7 @@ public class Drawer_activity extends Activity {
 
     public Drawer_activity() {
     }
+
 
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     @Override

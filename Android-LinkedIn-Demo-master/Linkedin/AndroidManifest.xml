@@ -40,6 +40,7 @@
         <activity android:name="frontEnd.SearchJob_activity" />
         <activity android:name="frontEnd.Drawer_activity" />
 
+
     </application>
 
 </manifest>
