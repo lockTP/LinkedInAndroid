@@ -1,9 +1,11 @@
 package beans;
 
+import java.io.Serializable;
+
 /**
  * Created by xiaotingli on 4/8/15.
  */
-public class NetworkUpdate {
+public class NetworkUpdate implements Serializable {
     private String companyName;
     private String title;
     private String description;

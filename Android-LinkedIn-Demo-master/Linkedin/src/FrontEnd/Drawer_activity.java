@@ -1,6 +1,7 @@
 
 package frontEnd;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 import android.annotation.TargetApi;
@@ -23,11 +24,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.linkedin.R;
+import com.mukesh.linkedin.MainActivity;
+
+import beans.MyProfile;
+import beans.NetworkUpdate;
+import linkedinAPI.MyProfileAPI;
+import linkedinAPI.NetworkUpdateAPI;
+import oauth.signpost.OAuthConsumer;
 
 /**
  * Created by lanzhang_mini on 15/4/9.
@@ -41,6 +52,7 @@ public class Drawer_activity extends Activity {
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
     private String[] mPlanetTitles;
+    static OAuthConsumer consumer = null;
 
     public Drawer_activity() {
     }
@@ -51,6 +63,9 @@ public class Drawer_activity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.drawer_main);
+
+        Intent intent = this.getIntent();
+        consumer = (OAuthConsumer) intent.getSerializableExtra("consumer");
 
         mTitle = mDrawerTitle = getTitle();
         mPlanetTitles = getResources().getStringArray(R.array.planets_array);
@@ -235,7 +250,16 @@ public class Drawer_activity extends Activity {
 
         private View initView(LayoutInflater inflater, ViewGroup container) {
             View view = inflater.inflate(R.layout.myprofile_main, container, false);
-
+            MyProfileAPI myProfileAPI = new MyProfileAPI();
+            MyProfile myProfile = myProfileAPI.testAPI(consumer);
+            TextView firstName_text = (TextView) view.findViewById(R.id.uname_TextView);
+            TextView lastName_text = (TextView) view.findViewById(R.id.uage_TextView);
+            TextView headline_text = (TextView) view.findViewById(R.id.uaddress_TextView);
+            TextView myLink_text = (TextView) view.findViewById(R.id.uemail_TextView);
+            firstName_text.setText(myProfile.getFirstName());
+            lastName_text.setText(myProfile.getLastName());
+            headline_text.setText(myProfile.getHeadline());
+            myLink_text.setText(myProfile.getUrl());
 //            TextView txtCat = (TextView) view.findViewById(R.id.txtCat);
 //            String colorCat = color + " " + txtCat.getText().toString();
 //            txtCat.setText(colorCat);
@@ -245,7 +269,9 @@ public class Drawer_activity extends Activity {
     }
 
     public static class FragmentSearch extends Fragment {
-
+        String selected_Company;
+        TextView count_text;
+        TextView keyword_text;
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             return initView(inflater, container);
@@ -253,6 +279,49 @@ public class Drawer_activity extends Activity {
 
         private View initView(LayoutInflater inflater, ViewGroup container) {
             View view = inflater.inflate(R.layout.search_main, container, false);
+            final String[] m = {"Google","Oracle","LinkedIn","Amazon","Baidu","Microsoft","Twitter","Facebook"};
+            final TextView spinnerview;
+            Spinner spinner;
+            ArrayAdapter<String> adapter;
+
+            count_text = (TextView) view.findViewById(R.id.count_editText);
+            keyword_text = (TextView) view.findViewById(R.id.keyword_editText);
+
+            spinnerview = (TextView)view.findViewById(R.id.company_spinnerTest);
+            spinner = (Spinner) view.findViewById(R.id.spinner);
+
+            adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item,m);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinner.setAdapter(adapter);
+
+            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+                    spinnerview.setText(m[arg2]);
+                    selected_Company = m[arg2];
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            spinner.setVisibility(View.VISIBLE);
+
+            Button search = (Button) view.findViewById(R.id.search_Button);
+
+            search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), MainActivity.class);
+                NetworkUpdateAPI networkUpdateAPI = new NetworkUpdateAPI();
+                String count_str = String.valueOf(count_text.getText());
+                String keyword_str = String.valueOf(keyword_text.getText());
+                ArrayList<NetworkUpdate> networkUpdates = networkUpdateAPI.networkSearchAPI(consumer, selected_Company, count_str, keyword_str);
+                intent.putExtra("networkUpdates", networkUpdates);
+                startActivity(intent);
+            }
+        });
 
             return view;
         }

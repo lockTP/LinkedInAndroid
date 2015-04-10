@@ -1,0 +1,27 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 17
+    buildToolsVersion "21.1.2"
+
+    defaultConfig {
+        applicationId "com.example.linkedin"
+        minSdkVersion 8
+        targetSdkVersion 16
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
+
+dependencies {
+    compile 'com.android.support:support-v4:18.0.0'
+    compile files('libs/linkedin-j-android.jar')
+    compile files('libs/signpost-commonshttp4-1.2.1.1.jar')
+    compile files('libs/signpost-core-1.2.1.1.jar')
+    compile files('libs/signpost-jetty6-1.2.1.1.jar')
+}
