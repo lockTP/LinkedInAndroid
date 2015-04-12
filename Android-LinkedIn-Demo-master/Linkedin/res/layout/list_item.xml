@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="55dip"
-    android:orientation="vertical" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white">
 
-    <TableRow
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
 
@@ -19,11 +20,16 @@
             android:id="@+id/lblListItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="17dip"
+            android:layout_toRightOf="@+id/imageView"
+            android:textSize="14dip"
+            android:textStyle="bold"
+            android:textColor="#ff61c0c4"
+            android:layout_marginRight="10px"
+            android:layout_marginTop="2pt"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft" />
+            android:paddingLeft="10dp" />
 
-    </TableRow>
+    </LinearLayout>
 
-</TableLayout>
+</RelativeLayout>

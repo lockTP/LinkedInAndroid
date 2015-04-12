@@ -26,22 +26,23 @@ public class NetworkUpdateAPI {
         String st = null;
         ArrayList<NetworkUpdate> networkUpdates = new ArrayList<NetworkUpdate>();
         DefaultHttpClient httpclient = new DefaultHttpClient();
+        companyName = companyName.toLowerCase();
         int companyId = 0;
-        if (companyName.equals("Google")){
+        if (companyName.equals("google")){
             companyId = 1441;
-        }else if (companyName.equals("Oracle")){
+        }else if (companyName.equals("oracle")){
             companyId = 1028;
-        }else if (companyName.equals("LinkedIn")){
+        }else if (companyName.equals("linkedin")){
             companyId = 1337;
-        }else if (companyName.equals("Amazon")){
+        }else if (companyName.equals("amazon")){
             companyId = 1586;
-        }else if (companyName.equals("Baidu")){
+        }else if (companyName.equals("baidu")){
             companyId = 48433;
-        }else if (companyName.equals("Microsoft")){
+        }else if (companyName.equals("microsoft")){
             companyId = 1035;
-        }else if (companyName.equals("Twitter")){
+        }else if (companyName.equals("twitter")){
             companyId = 96622;
-        }else if(companyName.equals("Facebook")){
+        }else if(companyName.equals("facebook")){
             companyId = 10667;
         }
 

@@ -19,7 +19,7 @@ import com.example.linkedin.R;
  */
 public class SearchJob_activity extends Activity {
 
-    private static final String[] m={"Google","Oracle","LinkedIn","Amazon","Baidu","Microsoft","Twitter","Facebook"};
+    private static final String[] m={"google","oracle","LinkedIn","amazon","baidu","microsoft","twitter","facebook"};
     private TextView spinnerview;
     private Spinner spinner;
     private ArrayAdapter<String> adapter;
@@ -36,6 +36,7 @@ public class SearchJob_activity extends Activity {
         spinner = (Spinner) findViewById(R.id.spinner);
 
         adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,m);
+
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 

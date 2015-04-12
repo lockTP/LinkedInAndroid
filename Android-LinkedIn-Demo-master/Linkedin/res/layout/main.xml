@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/blue_bg_rect"
+    android:background="@drawable/background"
     android:orientation="vertical" >
 
     <RelativeLayout
@@ -49,7 +49,33 @@
         android:textSize="16sp"
         android:textStyle="bold"
         android:visibility="invisible" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="920px"
+        android:background="@drawable/btn_active_pressed"
+        android:gravity="center"
+
+        android:padding="8dp"
+        android:text="Login"
+        android:textColor="@android:color/white"
+        android:textSize="70px"
+        android:textStyle="bold" />
+    </LinearLayout>
     <Button
         android:id="@+id/share"
         android:layout_width="wrap_content"
@@ -59,20 +85,6 @@
         android:layout_marginTop="22dp"
         android:background="@drawable/linkedin_share"
         android:visibility="invisible" />
-
-    <Button
-        android:id="@+id/login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerInParent="true"
-        android:layout_centerVertical="true"
-        android:background="@drawable/btn_active_pressed"
-        android:gravity="center_vertical|center_horizontal"
-        android:padding="8dp"
-        android:text="Login"
-        android:textColor="@android:color/white"
-        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/photo"
@@ -89,13 +101,13 @@
         android:id="@+id/et_share"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_alignBottom="@+id/login"
-        android:layout_alignParentRight="true"
         android:ems="10"
         android:gravity="top|center_vertical"
         android:hint="Enter Your Text to Share"
-        android:visibility="invisible" >
+        android:visibility="invisible"
 
+        android:layout_alignParentLeft="true">
+        <!--android:layout_alignBottom="@+id/login"-->
         <requestFocus />
     </EditText>
 

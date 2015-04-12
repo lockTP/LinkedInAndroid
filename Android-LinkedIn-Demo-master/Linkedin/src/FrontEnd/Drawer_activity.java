@@ -52,7 +52,11 @@ public class Drawer_activity extends Activity {
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
     private String[] mPlanetTitles;
+
     static OAuthConsumer consumer = null;
+
+    static final String[] m={"google","oracle","LinkedIn","amazon","baidu","microsoft","twitter","facebook"};
+
 
     public Drawer_activity() {
     }
@@ -250,6 +254,7 @@ public class Drawer_activity extends Activity {
 
         private View initView(LayoutInflater inflater, ViewGroup container) {
             View view = inflater.inflate(R.layout.myprofile_main, container, false);
+
             MyProfileAPI myProfileAPI = new MyProfileAPI();
             MyProfile myProfile = myProfileAPI.testAPI(consumer);
             TextView firstName_text = (TextView) view.findViewById(R.id.uname_TextView);
@@ -260,18 +265,26 @@ public class Drawer_activity extends Activity {
             lastName_text.setText(myProfile.getLastName());
             headline_text.setText(myProfile.getHeadline());
             myLink_text.setText(myProfile.getUrl());
+
 //            TextView txtCat = (TextView) view.findViewById(R.id.txtCat);
 //            String colorCat = color + " " + txtCat.getText().toString();
 //            txtCat.setText(colorCat);
 
             return view;
         }
+
     }
 
     public static class FragmentSearch extends Fragment {
+
         String selected_Company;
         TextView count_text;
         TextView keyword_text;
+
+
+        Fragment frag = new Fragment();
+
+
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             return initView(inflater, container);
@@ -323,8 +336,11 @@ public class Drawer_activity extends Activity {
             }
         });
 
+
             return view;
         }
+
+
 
     }
 }
